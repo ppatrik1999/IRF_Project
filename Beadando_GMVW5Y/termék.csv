@@ -1,0 +1,51 @@
+Termék azonosítója;Termék megnevezése;Gyártó;Beszerzett mennyiség;Eladott mennyiség;Készleten lévõ termékek száma
+1;Lábos;Kenwood;75;56;19
+2;Serpenyõ;KitchenAid;25;25;0
+3;Jénai edény;Moulenix;45;36;9
+4;Zöldségpucoló;Tefal;12;10;2
+5;Vágókés;Philips;96;51;45
+6;Villa;Bosch;57;41;16
+7;Kanál;Braun;49;18;31
+8;Kés;KITFORT;35;9;26
+9;Olló;De'Longhi;39;39;0
+10;Evõeszköztartó;Miele;65;54;11
+11;Lapos tányér;Schönwald;87;69;18
+12;Mély tányér;Villeroy&Boh;55;24;31
+13;Müzlis tál;Kenwood;24;24;0
+14;Vizes pohár;Kenwood;18;10;8
+15;Teás bögre;KitchenAid;8;8;0
+16;Kávés csésze;Moulenix;19;18;1
+17;Sörös korsó;Tefal;68;60;8
+18;Boros pohár;Philips;51;29;22
+19;Pezsgõs pohár;Bosch;30;27;3
+20;Vágódeszka;Braun;21;10;11
+21;Fakanál;KITFORT;99;36;63
+22;Merõkanál;De'Longhi;100;54;46
+23;Reszelõ;Miele;68;21;47
+24;Fém csipesz;Schönwald;44;30;14
+25;Fém tál;Villeroy&Boh;24;24;0
+26;Tészta szûrõ;Kenwood;18;10;8
+27;Konyharuha;KitchenAid;8;6;2
+28;Fogókesztyû;Moulenix;19;11;8
+29;Konzervnyitó;Tefal;68;50;18
+30;Mosogatószer;Philips;51;34;17
+31;Ebéd tároló doboz;Bosch;30;20;10
+32;Bornyitó;Braun;21;9;12
+33;Mosogató szivacs;KITFORT;99;74;25
+34;Turmix;De'Longhi;100;55;45
+35;Digitális mérleg;Miele;68;24;44
+36;Botmixer;Schönwald;44;30;14
+37;Vízforraló;Villeroy&Boh;97;80;17
+38;Hûtõszekrény;Kenwood;42;27;15
+39;Mikrohullûmú sütõ;Kenwood;71;39;32
+40;Kávéfõzõ;KitchenAid;76;21;55
+41;Kenyérpirító;Moulenix;32;30;2
+42;Fûszertartó;Tefal;11;2;9
+43;Kancsó;Philips;5;5;0
+44;Edényszárító;Bosch;75;75;0
+45;Fûszertartartó polc;Braun;59;48;11
+46;Krumplitároló;KITFORT;78;35;43
+47;Teafilter tartó doboz;De'Longhi;36;8;28
+48;Szemetes;Miele;21;21;0
+49;Rizs szûrõ;Schönwald;68;41;27
+50;Sörnyitó;Villeroy&Boh;44;18;26
