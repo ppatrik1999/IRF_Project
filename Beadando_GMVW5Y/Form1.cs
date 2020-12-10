@@ -17,6 +17,10 @@ namespace Beadando_GMVW5Y
 {
     public partial class Form1 : Form
     {
+        Excel.Application xlApp;
+        Excel.Workbook xlWB;
+        Excel.Worksheet xlSheet;
+
         List<Product> Store = new List<Product>();
         List<Product> AvailableProducts = new List<Product>();
         List<Product> NotAvailableProducts = new List<Product>();
@@ -24,9 +28,8 @@ namespace Beadando_GMVW5Y
         {
             InitializeComponent();
             Store = GetStore("termék.csv");
-            dataGridView1.DataSource = Store;
+            dataGridView1.DataSource = Store;           
         }
-
         public List<Product> GetStore(string csvpath)
         {
             List<Product> store = new List<Product>();
@@ -50,7 +53,6 @@ namespace Beadando_GMVW5Y
             }
             return store;
         }
-
         public void GetDelete()
         {
             AvailableProducts.Clear();
@@ -66,12 +68,33 @@ namespace Beadando_GMVW5Y
                 {
                     AvailableProducts.Add(s);
                 }
-            }
-            
+            }            
         }
         private void button1_Click(object sender, EventArgs e)
         {
             GetDelete();
+        }
+
+        public void CreateExcel()
+        {
+            try
+            {              
+                xlApp = new Excel.Application();            
+                xlWB = xlApp.Workbooks.Add(Missing.Value);
+                xlSheet = xlWB.ActiveSheet;
+                //CreateTable();               
+                xlApp.Visible = true;
+                xlApp.UserControl = true;
+            }
+            catch (Exception ex) 
+            {
+                string errMsg = string.Format("Error: {0}\nLine: {1}", ex.Message, ex.Source);
+                MessageBox.Show(errMsg, "Error");
+                xlWB.Close(false, Type.Missing, Type.Missing);
+                xlApp.Quit();
+                xlWB = null;
+                xlApp = null;
+            }
         }
     }
 }
