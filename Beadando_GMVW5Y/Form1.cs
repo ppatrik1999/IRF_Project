@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Reflection;
 using System.Diagnostics;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Beadando_GMVW5Y
 {
@@ -59,7 +60,7 @@ namespace Beadando_GMVW5Y
         {
             AvailableProducts.Clear();
             NotAvailableProducts.Clear();
-            
+
             foreach (var s in Store)
             {
                 if (s.Elérhető_mennyiség == 0)
@@ -102,10 +103,10 @@ namespace Beadando_GMVW5Y
                 xlApp = null;
             }
         }
-        
+
         public void CreateTable()
         {
-            string[] headers = new string[] 
+            string[] headers = new string[]
             {
             "Terméknév",
             };
@@ -124,14 +125,29 @@ namespace Beadando_GMVW5Y
                   x++;                
               }
              */
-           
+
             xlSheet.get_Range(
             GetCell(2, 1),
             GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;
-            xlSheet.Cells[1, 1] = headers;
+            xlSheet.Cells[1, 1] = headers[0];
+
+            Excel.Range headerRange = xlSheet.get_Range(GetCell(1, 1), GetCell(1, headers.Length));
+            Excel.Range dataRange = xlSheet.get_Range(GetCell(2, 1), GetCell(1 + values.GetLength(0), values.GetLength(1)));
+            dataRange.Font.Color = Color.Blue;
+            dataRange.Font.Italic = true;           
+            dataRange.EntireColumn.AutoFit();
+            dataRange.Interior.Color = Color.Orange;
+            headerRange.Font.Bold = true;
+            headerRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+            headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            headerRange.EntireColumn.AutoFit();
+            headerRange.RowHeight = 30;
+            headerRange.Font.Color = Color.Black;
+            headerRange.Interior.Color = Color.DarkOrange;
+            headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
         }
 
-        private string GetCell(int x, int y)
+        public string GetCell(int x, int y)
         {
             string ExcelCoordinate = "";
             int dividend = y;
@@ -147,10 +163,11 @@ namespace Beadando_GMVW5Y
 
             return ExcelCoordinate;
         }
-
     }
+}
+    
            
-        }
+        
         
     
 
