@@ -30,9 +30,26 @@ namespace Beadando_GMVW5Y
         {
             InitializeComponent();
             Store = GetStore("termék.csv");
-            dataGridView1.DataSource = Store;
+            //dataGridView1.DataSource = Store;
+            GetDgw();
             button1.Text = ("Hiánycikkek megtekintése Excel-ben");
         }
+
+        public void GetDgw()
+        {
+            dataGridView1.Dock = DockStyle.Fill;
+            dataGridView1.DataSource = Store;
+            dataGridView1.AutoSize = true;
+            dataGridView1.BackgroundColor = Color.LightGray;
+            dataGridView1.BorderStyle = BorderStyle.Fixed3D;
+            dataGridView1.ReadOnly = true;
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Tahoma", 8, FontStyle.Bold);
+            dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.Blue;
+            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Yellow;
+            dataGridView1.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;
+            dataGridView1.EnableHeadersVisualStyles = false;
+        }
+
         public List<Product> GetStore(string csvpath)
         {
             List<Product> store = new List<Product>();
@@ -47,9 +64,9 @@ namespace Beadando_GMVW5Y
                         ID = int.Parse(line[0]),
                         Név = line[1],
                         Gyártó = line[2],
-                        Beszerzett_mennyiség = int.Parse(line[3]),
-                        Eladott_mennyiség = int.Parse(line[4]),
-                        Elérhető_mennyiség = int.Parse(line[5]),
+                        Beszerzett_db = int.Parse(line[3]),
+                        Eladott_db = int.Parse(line[4]),
+                        Elérhető_db = int.Parse(line[5]),
                         Egységár = int.Parse(line[6])
                     });
                 }
@@ -57,20 +74,15 @@ namespace Beadando_GMVW5Y
             return store;
         }
         public void GetDelete()
-        {
-            AvailableProducts.Clear();
+        {            
             NotAvailableProducts.Clear();
 
             foreach (var s in Store)
             {
-                if (s.Elérhető_mennyiség == 0)
+                if (s.Elérhető_db == 0)
                 {
                     NotAvailableProducts.Add(s);
-                }
-                else
-                {
-                    AvailableProducts.Add(s);
-                }
+                }              
             }
         }
         private void button1_Click(object sender, EventArgs e)
@@ -103,7 +115,6 @@ namespace Beadando_GMVW5Y
                 xlApp = null;
             }
         }
-
         public void CreateTable()
         {
             string[] headers = new string[]
@@ -132,11 +143,6 @@ namespace Beadando_GMVW5Y
             xlSheet.Cells[1, 1] = headers[0];
 
             Excel.Range headerRange = xlSheet.get_Range(GetCell(1, 1), GetCell(1, headers.Length));
-            Excel.Range dataRange = xlSheet.get_Range(GetCell(2, 1), GetCell(1 + values.GetLength(0), values.GetLength(1)));
-            dataRange.Font.Color = Color.Blue;
-            dataRange.Font.Italic = true;           
-            dataRange.EntireColumn.AutoFit();
-            dataRange.Interior.Color = Color.Orange;
             headerRange.Font.Bold = true;
             headerRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
             headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
@@ -145,8 +151,13 @@ namespace Beadando_GMVW5Y
             headerRange.Font.Color = Color.Black;
             headerRange.Interior.Color = Color.DarkOrange;
             headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+           
+            Excel.Range dataRange = xlSheet.get_Range(GetCell(2, 1), GetCell(1 + values.GetLength(0), values.GetLength(1)));
+            dataRange.Font.Color = Color.Blue;
+            dataRange.Font.Italic = true;           
+            dataRange.EntireColumn.AutoFit();
+            dataRange.Interior.Color = Color.Orange;          
         }
-
         public string GetCell(int x, int y)
         {
             string ExcelCoordinate = "";
