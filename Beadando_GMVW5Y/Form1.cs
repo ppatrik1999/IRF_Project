@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Reflection;
+using System.Diagnostics;
 
 namespace Beadando_GMVW5Y
 {
@@ -28,12 +29,13 @@ namespace Beadando_GMVW5Y
         {
             InitializeComponent();
             Store = GetStore("termék.csv");
-            dataGridView1.DataSource = Store;           
+            dataGridView1.DataSource = Store;
+            button1.Text = ("Hiánycikkek megtekintése Excel-ben");
         }
         public List<Product> GetStore(string csvpath)
         {
             List<Product> store = new List<Product>();
-           
+
             using (StreamReader sr = new StreamReader(csvpath, Encoding.Default))
             {
                 while (!sr.EndOfStream)
@@ -60,33 +62,37 @@ namespace Beadando_GMVW5Y
             
             foreach (var s in Store)
             {
-                if (s.Elérhető_mennyiség == 0 )
+                if (s.Elérhető_mennyiség == 0)
                 {
-                    NotAvailableProducts.Add(s);                  
+                    NotAvailableProducts.Add(s);
                 }
                 else
                 {
                     AvailableProducts.Add(s);
                 }
-            }            
+            }
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("A következő Excel-ben, azok a termékek láthatóak, melyekből berendelés szükséges, mert hiánycikk a vállalatnál.");
+
             GetDelete();
+            CreateExcel();
+            CreateTable();
         }
 
         public void CreateExcel()
         {
             try
-            {              
-                xlApp = new Excel.Application();            
+            {
+                xlApp = new Excel.Application();
                 xlWB = xlApp.Workbooks.Add(Missing.Value);
                 xlSheet = xlWB.ActiveSheet;
-                //CreateTable();               
+                CreateTable();
                 xlApp.Visible = true;
                 xlApp.UserControl = true;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 string errMsg = string.Format("Error: {0}\nLine: {1}", ex.Message, ex.Source);
                 MessageBox.Show(errMsg, "Error");
@@ -96,5 +102,56 @@ namespace Beadando_GMVW5Y
                 xlApp = null;
             }
         }
+        
+        public void CreateTable()
+        {
+            string[] headers = new string[] 
+            {
+            "Terméknév",
+            };
+            object[,] values = new object[NotAvailableProducts.Count, headers.Length];
+            int counter = 0;
+            foreach (var s in NotAvailableProducts)
+            {
+                values[counter, 0] = s.Név;
+                counter++;
+            }
+            /*  int x = 2; // azért 2 mert 1 a fejléc
+              xlSheet.Cells[1, 1] = "Terméknév";
+              for (int i = 0; i < NotAvailableProducts.Count; i++)
+              {
+                  xlSheet.Cells[x, 1] = NotAvailableProducts[i].Név;             
+                  x++;                
+              }
+             */
+           
+            xlSheet.get_Range(
+            GetCell(2, 1),
+            GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;
+            xlSheet.Cells[1, 1] = headers;
+        }
+
+        private string GetCell(int x, int y)
+        {
+            string ExcelCoordinate = "";
+            int dividend = y;
+            int modulo;
+
+            while (dividend > 0)
+            {
+                modulo = (dividend - 1) % 26;
+                ExcelCoordinate = Convert.ToChar(65 + modulo).ToString() + ExcelCoordinate;
+                dividend = (int)((dividend - modulo) / 26);
+            }
+            ExcelCoordinate += x.ToString();
+
+            return ExcelCoordinate;
+        }
+
     }
-}
+           
+        }
+        
+    
+
+
