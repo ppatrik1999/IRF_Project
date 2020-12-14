@@ -30,9 +30,22 @@ namespace Beadando_GMVW5Y
         {
             InitializeComponent();
             Store = GetStore("termék.csv");
-            //dataGridView1.DataSource = Store;
+            
             GetDgw();
-            button1.Text = ("Hiánycikkek megtekintése Excel-ben");
+            button1.Text = ("Hiánycikkek megtekintése Excel-ben");                    
+        }
+
+        private void GetRemove()
+        {
+           
+            for (int i = 0; i < Store.Count; i++)
+            {
+                if (Store[i].Elérhető_db==0)
+                {
+                    Store.RemoveAt(i);
+                }
+            }
+            dataGridView1.Refresh();
         }
 
         public void GetDgw()
@@ -42,7 +55,7 @@ namespace Beadando_GMVW5Y
             dataGridView1.AutoSize = true;
             dataGridView1.BackgroundColor = Color.LightGray;
             dataGridView1.BorderStyle = BorderStyle.Fixed3D;
-            dataGridView1.ReadOnly = true;
+            
             dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Tahoma", 8, FontStyle.Bold);
             dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.Blue;
             dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Yellow;
@@ -73,26 +86,25 @@ namespace Beadando_GMVW5Y
             }
             return store;
         }
-        public void GetDelete()
+        public void GetNot()
         {            
-            NotAvailableProducts.Clear();
-
+            //NotAvailableProducts.Clear();
+            
             foreach (var s in Store)
             {
                 if (s.Elérhető_db == 0)
                 {
                     NotAvailableProducts.Add(s);
-                }              
+                }         
+                else
+                {
+                    AvailableProducts.Add(s);
+                }
+
+
             }
         }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("A következő Excel-ben, azok a termékek láthatóak, melyekből berendelés szükséges, mert hiánycikk a vállalatnál.");
-
-            GetDelete();
-            CreateExcel();
-            CreateTable();
-        }
+       
 
         public void CreateExcel()
         {
@@ -174,8 +186,29 @@ namespace Beadando_GMVW5Y
 
             return ExcelCoordinate;
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            GetRemove();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            MessageBox.Show("A következő Excel-ben, azok a termékek láthatóak, melyekből berendelés szükséges, mert hiánycikk a vállalatnál.");
+
+            GetNot();
+            CreateExcel();
+            CreateTable();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form2 f2 = new Form2();
+            f2.Show();
+        }
     }
-}
+    }
+
     
            
         

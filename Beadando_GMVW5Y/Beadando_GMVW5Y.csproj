@@ -53,10 +53,22 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductPicture.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -108,33 +120,6 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Pictures\1.jpg" />
-    <Content Include="Pictures\10.jpg" />
-    <Content Include="Pictures\11.jpg" />
-    <Content Include="Pictures\12.jpg" />
-    <Content Include="Pictures\13.jpg" />
-    <Content Include="Pictures\14.jpg" />
-    <Content Include="Pictures\15.jpg" />
-    <Content Include="Pictures\16.jpg" />
-    <Content Include="Pictures\17.jpg" />
-    <Content Include="Pictures\18.jpg" />
-    <Content Include="Pictures\19.jpg" />
-    <Content Include="Pictures\2.jpg" />
-    <Content Include="Pictures\20.jpg" />
-    <Content Include="Pictures\21.jpg" />
-    <Content Include="Pictures\22.jpg" />
-    <Content Include="Pictures\23.jpg" />
-    <Content Include="Pictures\24.jpg" />
-    <Content Include="Pictures\25.jpg" />
-    <Content Include="Pictures\3.jpg" />
-    <Content Include="Pictures\4.jpg" />
-    <Content Include="Pictures\5.jpg" />
-    <Content Include="Pictures\6.jpg" />
-    <Content Include="Pictures\7.jpg" />
-    <Content Include="Pictures\8.jpg" />
-    <Content Include="Pictures\9.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
