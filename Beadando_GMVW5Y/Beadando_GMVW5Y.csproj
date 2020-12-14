@@ -109,5 +109,32 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Pictures\1.jpg" />
+    <Content Include="Pictures\10.jpg" />
+    <Content Include="Pictures\11.jpg" />
+    <Content Include="Pictures\12.jpg" />
+    <Content Include="Pictures\13.jpg" />
+    <Content Include="Pictures\14.jpg" />
+    <Content Include="Pictures\15.jpg" />
+    <Content Include="Pictures\16.jpg" />
+    <Content Include="Pictures\17.jpg" />
+    <Content Include="Pictures\18.jpg" />
+    <Content Include="Pictures\19.jpg" />
+    <Content Include="Pictures\2.jpg" />
+    <Content Include="Pictures\20.jpg" />
+    <Content Include="Pictures\21.jpg" />
+    <Content Include="Pictures\22.jpg" />
+    <Content Include="Pictures\23.jpg" />
+    <Content Include="Pictures\24.jpg" />
+    <Content Include="Pictures\25.jpg" />
+    <Content Include="Pictures\3.jpg" />
+    <Content Include="Pictures\4.jpg" />
+    <Content Include="Pictures\5.jpg" />
+    <Content Include="Pictures\6.jpg" />
+    <Content Include="Pictures\7.jpg" />
+    <Content Include="Pictures\8.jpg" />
+    <Content Include="Pictures\9.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
