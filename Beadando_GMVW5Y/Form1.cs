@@ -14,6 +14,8 @@ using Excel = Microsoft.Office.Interop.Excel;
 using System.Reflection;
 using System.Diagnostics;
 using System.Security.Cryptography.X509Certificates;
+using Microsoft.Office.Interop.Excel;
+using Font = System.Drawing.Font;
 
 namespace Beadando_GMVW5Y
 {
@@ -23,24 +25,27 @@ namespace Beadando_GMVW5Y
         Excel.Workbook xlWB;
         Excel.Worksheet xlSheet;
 
-        List<Product> Store = new List<Product>();
+        BindingList<Product> Store = new BindingList<Product>();
         List<Product> AvailableProducts = new List<Product>();
         List<Product> NotAvailableProducts = new List<Product>();
         public Form1()
         {
             InitializeComponent();
             Store = GetStore("termék.csv");
-            
             GetDgw();
-            button1.Text = ("Hiánycikkek megtekintése Excel-ben");                    
+            button1.Text = ("Hiánycikkek megtekintése Excel-ben");
+            button2.Text = "Készleten lévő termékek megjelenítése";
+            button3.Text = "Termék kép nézegető";
+            GetNot();
+            Osszegkiir(GetBevetel());
+            label1.Text = "Összes bevétel:";
         }
 
         private void GetRemove()
         {
-           
             for (int i = 0; i < Store.Count; i++)
             {
-                if (Store[i].Elérhető_db==0)
+                if (Store[i].Elérhető_db == 0)
                 {
                     Store.RemoveAt(i);
                 }
@@ -55,7 +60,7 @@ namespace Beadando_GMVW5Y
             dataGridView1.AutoSize = true;
             dataGridView1.BackgroundColor = Color.LightGray;
             dataGridView1.BorderStyle = BorderStyle.Fixed3D;
-            
+
             dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Tahoma", 8, FontStyle.Bold);
             dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.Blue;
             dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Yellow;
@@ -63,9 +68,9 @@ namespace Beadando_GMVW5Y
             dataGridView1.EnableHeadersVisualStyles = false;
         }
 
-        public List<Product> GetStore(string csvpath)
+        public BindingList<Product> GetStore(string csvpath)
         {
-            List<Product> store = new List<Product>();
+            BindingList<Product> store = new BindingList<Product>();
 
             using (StreamReader sr = new StreamReader(csvpath, Encoding.Default))
             {
@@ -87,24 +92,22 @@ namespace Beadando_GMVW5Y
             return store;
         }
         public void GetNot()
-        {            
+        {
             //NotAvailableProducts.Clear();
-            
+
             foreach (var s in Store)
             {
                 if (s.Elérhető_db == 0)
                 {
                     NotAvailableProducts.Add(s);
-                }         
+                }
                 else
                 {
                     AvailableProducts.Add(s);
                 }
-
-
             }
         }
-       
+
 
         public void CreateExcel()
         {
@@ -163,12 +166,12 @@ namespace Beadando_GMVW5Y
             headerRange.Font.Color = Color.Black;
             headerRange.Interior.Color = Color.DarkOrange;
             headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
-           
+
             Excel.Range dataRange = xlSheet.get_Range(GetCell(2, 1), GetCell(1 + values.GetLength(0), values.GetLength(1)));
             dataRange.Font.Color = Color.Blue;
-            dataRange.Font.Italic = true;           
+            dataRange.Font.Italic = true;
             dataRange.EntireColumn.AutoFit();
-            dataRange.Interior.Color = Color.Orange;          
+            dataRange.Interior.Color = Color.Orange;
         }
         public string GetCell(int x, int y)
         {
@@ -196,7 +199,7 @@ namespace Beadando_GMVW5Y
         {
             MessageBox.Show("A következő Excel-ben, azok a termékek láthatóak, melyekből berendelés szükséges, mert hiánycikk a vállalatnál.");
 
-            GetNot();
+            // GetNot();
             CreateExcel();
             CreateTable();
         }
@@ -205,6 +208,22 @@ namespace Beadando_GMVW5Y
         {
             Form2 f2 = new Form2();
             f2.Show();
+        }
+
+        private int GetBevetel()
+        {
+            int osszeg = 0;
+            for (int i = 0; i < AvailableProducts.Count; i++)
+            {
+                osszeg += Store[i].Egységár * Store[i].Eladott_db;
+            }
+            return osszeg;
+        }
+
+        public void Osszegkiir(int osszeg)
+        {
+            Bevetel b = new Bevetel(osszeg.ToString());
+            panel1.Controls.Add(b);
         }
     }
     }
