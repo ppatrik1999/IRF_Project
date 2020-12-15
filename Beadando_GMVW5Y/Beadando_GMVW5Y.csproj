@@ -46,9 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bevetel.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Entities\Bevetel.cs">
       <SubType>Component</SubType>
     </Compile>
