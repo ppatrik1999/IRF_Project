@@ -113,6 +113,7 @@ namespace Beadando_GMVW5Y
             try
             {
                 xlApp = new Excel.Application();
+                xlWB = xlApp.Workbooks.Add(Missing.Value);
                 xlSheet = xlWB.ActiveSheet;
                 CreateTable();
                 xlApp.Visible = true;
