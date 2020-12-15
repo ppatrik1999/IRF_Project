@@ -82,6 +82,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="CSVproduct\termék.csv" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -123,6 +124,33 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Picture\termek_1.jpg" />
+    <Content Include="Picture\termek_10.jpg" />
+    <Content Include="Picture\termek_11.jpg" />
+    <Content Include="Picture\termek_12.jpg" />
+    <Content Include="Picture\termek_13.jpg" />
+    <Content Include="Picture\termek_14.jpg" />
+    <Content Include="Picture\termek_15.jpg" />
+    <Content Include="Picture\termek_16.jpg" />
+    <Content Include="Picture\termek_17.jpg" />
+    <Content Include="Picture\termek_18.jpg" />
+    <Content Include="Picture\termek_19.jpg" />
+    <Content Include="Picture\termek_2.jpg" />
+    <Content Include="Picture\termek_20.jpg" />
+    <Content Include="Picture\termek_21.jpg" />
+    <Content Include="Picture\termek_22.jpg" />
+    <Content Include="Picture\termek_23.jpg" />
+    <Content Include="Picture\termek_24.jpg" />
+    <Content Include="Picture\termek_25.jpg" />
+    <Content Include="Picture\termek_3.jpg" />
+    <Content Include="Picture\termek_4.jpg" />
+    <Content Include="Picture\termek_5.jpg" />
+    <Content Include="Picture\termek_6.jpg" />
+    <Content Include="Picture\termek_7.jpg" />
+    <Content Include="Picture\termek_8.jpg" />
+    <Content Include="Picture\termek_9.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -40,7 +40,6 @@ namespace Beadando_GMVW5Y
             Osszegkiir(GetBevetel());
             label1.Text = "Összes bevétel:";
         }
-
         private void GetRemove()
         {
             for (int i = 0; i < Store.Count; i++)
@@ -113,8 +112,10 @@ namespace Beadando_GMVW5Y
         {
             try
             {
+                var projectdir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
                 xlApp = new Excel.Application();
-                xlWB = xlApp.Workbooks.Add(Missing.Value);
+
+               // xlWB = xlApp.Workbooks.Open(projectdir + @"C:\Users\Patrik\source\repos\IRF_Project\Beadando_GMVW5Y\CSVproduct\termék.csv");
                 xlSheet = xlWB.ActiveSheet;
                 CreateTable();
                 xlApp.Visible = true;
