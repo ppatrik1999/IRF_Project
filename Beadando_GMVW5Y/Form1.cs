@@ -31,9 +31,9 @@ namespace Beadando_GMVW5Y
         public Form1()
         {
             InitializeComponent();
-            Store = GetStore("termék.csv");
+            Store = GetStore(@"C:\Users\Patrik\source\repos\IRF_Project\Beadando_GMVW5Y\CSVproduct\termék.csv");
             GetDgw();
-            button1.Text = ("Hiánycikkek megtekintése Excel-ben");
+            button1.Text = "Hiánycikkek megtekintése Excel-ben";
             button2.Text = "Készleten lévő termékek megjelenítése";
             button3.Text = "Termék kép nézegető";
             GetNot();
@@ -112,10 +112,7 @@ namespace Beadando_GMVW5Y
         {
             try
             {
-                var projectdir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
                 xlApp = new Excel.Application();
-
-               // xlWB = xlApp.Workbooks.Open(projectdir + @"C:\Users\Patrik\source\repos\IRF_Project\Beadando_GMVW5Y\CSVproduct\termék.csv");
                 xlSheet = xlWB.ActiveSheet;
                 CreateTable();
                 xlApp.Visible = true;
@@ -144,14 +141,6 @@ namespace Beadando_GMVW5Y
                 values[counter, 0] = s.Név;
                 counter++;
             }
-            /*  int x = 2; // azért 2 mert 1 a fejléc
-              xlSheet.Cells[1, 1] = "Terméknév";
-              for (int i = 0; i < NotAvailableProducts.Count; i++)
-              {
-                  xlSheet.Cells[x, 1] = NotAvailableProducts[i].Név;             
-                  x++;                
-              }
-             */
 
             xlSheet.get_Range(
             GetCell(2, 1),
@@ -199,8 +188,6 @@ namespace Beadando_GMVW5Y
         private void button1_Click_1(object sender, EventArgs e)
         {
             MessageBox.Show("A következő Excel-ben, azok a termékek láthatóak, melyekből berendelés szükséges, mert hiánycikk a vállalatnál.");
-
-            // GetNot();
             CreateExcel();
             CreateTable();
         }
